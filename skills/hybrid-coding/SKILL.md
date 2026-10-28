@@ -34,6 +34,11 @@ below is built around spending them only where your judgment is needed.
 - **Exception:** a change of a few lines you already have full context for. Just make it; a
   delegation round-trip costs more.
 
+**Agent types.** The skill ships three subagent types: `scout`, `scribe` and `worker` (listed
+as `hybrid-coding:<name>` when installed as a plugin). Use them so the user sees the role. If
+your agent list doesn't have them, use `Explore` for scouts and `general-purpose` for the others.
+Always pass `model`: it overrides the type's default.
+
 ## 0. Setup
 
 Parse `$ARGUMENTS` for `coder=<model>`, `scout=<model>` and the task. A model is a Claude alias
@@ -69,7 +74,7 @@ In a few lines, tell the user what you understood and how you'll go about it. Cl
   - *decide* (trade-offs, API shape, data model) → you and the user. Never delegate a decision.
 
 **Scouts** keep large reads out of your context:
-- `Agent(subagent_type: "Explore", model: <scout>, effort: "low")` with a precise question and
+- `Agent(subagent_type: "scout", model: <scout>, effort: "low")` with a precise question and
   the answer shape you want ("file:line list + 5-line summary").
 - For an Ollama scout: `hc worker --mode scout` (see `references/backends.md`).
 - To digest a big blob (logs, test output, a large diff), pipe it through `hc ask <model> "…"`.
@@ -105,7 +110,7 @@ rules:
 Then dispatch the scribe:
 
 ```
-Agent(description: "scribe: spec + plan", subagent_type: "general-purpose",
+Agent(description: "scribe: spec + plan", subagent_type: "scribe",
       model: <coder if it's a Claude model, else "sonnet">, effort: "low",
       prompt: "Read <S>/SCRIBE.md and follow it. Jobs: spec, plan. Notes: <only what isn't in the conversation>")
 ```
@@ -135,7 +140,7 @@ You are worker T<nn>. Read <S>/WORKER.md and follow it.
 For a worker in a worktree you created, append: "Work only in <wt>; use absolute paths; run
 commands as `cd <wt> && …`."
 
-- **Claude coder:** `Agent(subagent_type: "general-purpose", model: <coder>, effort: "medium",
+- **Claude coder:** `Agent(subagent_type: "worker", model: <coder>, effort: "medium",
   description: "T<nn> <few words>", prompt: <the line above>)`. Add `isolation: "worktree"` when
   the plan says worktree and the task doesn't depend on uncommitted changes.
 - **Ollama coder:** `hc worker --session <S> --task T<nn> --model ollama:<name> --cwd <dir>

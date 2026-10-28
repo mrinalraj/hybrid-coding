@@ -4,7 +4,7 @@
 
 | Backend | Use for | Tools | Lifecycle |
 |---|---|---|---|
-| Claude subagent (Agent tool) | Claude coders and scouts — the default | full (or read-only via `Explore`) | background; notification on finish; SendMessage to continue |
+| Claude subagent (Agent tool) | Claude coders and scouts — the default | full (`worker`, `scribe`) or read-only (`scout`) | background; notification on finish; SendMessage to continue |
 | Headless Claude CLI (`hc worker`) | Ollama models; a Claude model under a different permission profile | allowlisted | Bash `run_in_background`; exit notification; `--resume` to continue |
 | Tool-less Ollama (`hc ask`) | summarizing or classifying text you pipe in | none | synchronous |
 
@@ -13,7 +13,7 @@
 ```
 Agent(
   description: "T03 add retry to sync client",
-  subagent_type: "general-purpose",     # "Explore" for read-only scouts
+  subagent_type: "worker",              # "scout" / "scribe" for those roles
   model: "sonnet",                      # sonnet | haiku | opus | fable
   effort: "medium",                     # scouts: "low"
   isolation: "worktree",                # only when the plan says so — see parallel.md
@@ -129,7 +129,7 @@ The model sees only what you pipe in, so it can't look anything up. Set `OLLAMA_
 
 - Coding, model is Claude → Agent tool.
 - Coding, model is Ollama → `hc worker`.
-- Discovery that needs to search the repo → Explore agent on the scout model (or `hc worker
+- Discovery that needs to search the repo → `scout` agent on the scout model (or `hc worker
   --mode scout` for an Ollama scout).
 - "Read this huge blob and tell me X" → `hc ask` if a local model is configured, otherwise
   a Claude scout given the file path.

@@ -67,13 +67,27 @@ As a Claude Code plugin:
 /plugin install hybrid-coding@hybrid-coding
 ```
 
-With the skills CLI:
+From a clone, with the install script:
+
+```
+git clone https://github.com/mrinalraj/hybrid-coding.git
+cd hybrid-coding
+./install.sh            # copies the skill and agents into ~/.claude
+```
+
+- `--link`: symlink instead of copying, so `git pull` updates the install.
+- `--project <dir>`: install into one project's `.claude/` instead.
+- `--force`: replace existing files that differ. Otherwise the script skips them.
+
+With the skills CLI, which installs only the skill, add the agents from a clone afterwards:
 
 ```
 npx skills add mrinalraj/hybrid-coding
+./install.sh --agents-only
 ```
 
-Or manually: copy or symlink `skills/hybrid-coding` into `~/.claude/skills/`.
+The agents are the `scout`, `scribe` and `worker` subagent types. Without them everything still
+works, but subagents show up as `general-purpose`. The plugin install includes them.
 
 Requirements: Claude Code, `git`, `bash`, `python3`. Ollama is optional.
 
@@ -118,6 +132,7 @@ See `skills/hybrid-coding/references/backends.md`.
 
 ```
 .claude-plugin/          plugin + marketplace manifests
+agents/                  scout, scribe and worker subagent types
 skills/hybrid-coding/
   SKILL.md               orchestrator workflow
   assets/                worker contract, scribe instructions, spec/plan/summary templates
