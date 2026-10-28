@@ -28,6 +28,8 @@ if [ $seed -eq 1 ]; then
   fi
   (cd "$repo" && git ls-files --others --exclude-standard -z) |
     while IFS= read -r -d '' f; do
+      case "$f" in .hybrid/*) continue ;; esac
+      [ -f "$repo/$f" ] || continue
       mkdir -p "$wt/$(dirname "$f")"
       cp -p "$repo/$f" "$wt/$f"
     done

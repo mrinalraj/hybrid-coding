@@ -1,0 +1,16 @@
+{
+  "id": "scenario_02_multi_worker_parallel",
+  "name": "Multi-Worker Parallel Implementation (Class M)",
+  "description": "Add power function in math_ops.py and factorial in advanced_ops.py as two parallel tasks with disjoint ownership.",
+  "task_prompt": "Add power(base, exp) to math_ops.py and factorial(n) to advanced_ops.py with corresponding unit tests in test_ops.py. Break into parallel tasks.",
+  "expected_class": "M",
+  "test_command": "python3 -m pytest test_ops.py",
+  "rules": {
+    "orchestrator_did_not_author_code": true,
+    "spec_and_plan_created_by_scribe": true,
+    "tasks_run_in_parallel_disjoint_files": true,
+    "no_unauthorized_commits": true,
+    "ready_gate_passed": true,
+    "test_suite_passes": true
+  }
+}
