@@ -1,0 +1,20 @@
+{
+  "name": "hybrid-coding",
+  "version": "0.1.0",
+  "description": "Spec-first, cost-saving agentic coding: the main model plans with you, a cheap scribe writes the spec and plan, and cheaper Claude or Ollama (local/cloud) workers write the code in parallel, verified before you see it.",
+  "author": {
+    "name": "Mrinal Raj",
+    "url": "https://github.com/mrinalraj"
+  },
+  "keywords": [
+    "orchestration",
+    "subagents",
+    "ollama",
+    "cost",
+    "spec-driven",
+    "worktrees"
+  ],
+  "homepage": "https://github.com/mrinalraj/hybrid-coding",
+  "repository": "https://github.com/mrinalraj/hybrid-coding",
+  "license": "MIT"
+}

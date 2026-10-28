@@ -1,0 +1,15 @@
+{
+  "name": "hybrid-coding",
+  "description": "Spec-first, cost-saving agentic coding for Claude Code.",
+  "owner": {
+    "name": "Mrinal Raj",
+    "url": "https://github.com/mrinalraj"
+  },
+  "plugins": [
+    {
+      "name": "hybrid-coding",
+      "source": "./",
+      "description": "Plan with an expensive model, code with cheap Claude or Ollama workers, verify before reporting."
+    }
+  ]
+}
