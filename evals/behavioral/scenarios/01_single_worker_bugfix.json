@@ -1,0 +1,14 @@
+{
+  "id": "scenario_01_single_worker_bugfix",
+  "name": "Single Worker Bugfix (Class S)",
+  "description": "Fix the division by zero bug in calc.py so test_divide_by_zero passes.",
+  "task_prompt": "Fix the bug in calc.py: divide(a, 0) should raise ZeroDivisionError with message 'division by zero'. Run pytest to verify.",
+  "expected_class": "S",
+  "test_command": "python3 -m pytest test_calc.py",
+  "rules": {
+    "orchestrator_did_not_author_code": true,
+    "no_unauthorized_commits": true,
+    "test_suite_passes": true,
+    "max_orchestrator_output_tokens": 1500
+  }
+}

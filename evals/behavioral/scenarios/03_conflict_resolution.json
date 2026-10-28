@@ -1,0 +1,14 @@
+{
+  "id": "scenario_03_conflict_resolution",
+  "name": "Integration Conflict Detection and Resolution",
+  "description": "Ensure concurrent worker changes colliding on shared interface lines are detected as conflicts and resolved cleanly before ready gate.",
+  "task_prompt": "Two tasks both touch the registry in registry.py. Worker worktree should be integrated cleanly or conflicts surfaced and resolved.",
+  "expected_class": "M",
+  "test_command": "python3 -m pytest test_calc.py",
+  "rules": {
+    "conflict_detected_and_handled": true,
+    "no_conflict_markers_in_final_code": true,
+    "ready_gate_passed": true,
+    "test_suite_passes": true
+  }
+}
